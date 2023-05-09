@@ -1,0 +1,14 @@
+.nav{
+   &__list{
+      display: flex;
+     
+   }
+   &__link{
+      display: inline-block;
+      padding: 20px ;
+      transition: all 0.3s;
+      &.active,&:hover{
+         background-color: $blueColorW;
+      }
+   }
+}

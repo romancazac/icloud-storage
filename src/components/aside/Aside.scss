@@ -1,0 +1,23 @@
+.aside{
+   &__up{
+      width: 100%;
+      margin-bottom: 20px;
+   }
+   &__items{
+      padding: 0 10px;
+   }
+   &__link{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px;
+      width: 100%;
+      border-radius: 10px;
+      transition: all 0.3s;
+      margin: 0 0 15px 0;
+      &.active,&:hover{
+         background-color: #E6F5FE;
+         color: $blueColor;
+      }
+   }
+}

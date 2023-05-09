@@ -1,0 +1,48 @@
+.profile{
+
+   &__actions{
+      position: relative;
+      &:hover{
+         .profile__drop{
+            visibility: visible;
+            opacity: 1;
+         }
+      }
+   }
+ 
+   &__drop{
+      position: absolute;
+      top: 110%;
+      left: 50%;
+      transform: translate(-50%, 0);
+      opacity: 0;
+      visibility: hidden;
+
+   }
+   &__logo{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      width: 30px;
+      height: 30px;
+      background-color: #00549C;
+      border-radius: 50%;
+      cursor: pointer;
+    
+   }
+   &__btn{
+      
+      background-color: #00549C;
+      padding: 0 25px;
+      color: #fff;
+      height: 45px;
+      font-size: 18px;
+      border-radius: 10px;
+      transition: all 0.3s;
+      &:hover{
+         background-color: $blueColorW;
+
+      }
+   }
+}
