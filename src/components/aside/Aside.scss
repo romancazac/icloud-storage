@@ -2,6 +2,10 @@
    &__up{
       width: 100%;
       margin-bottom: 20px;
+      cursor: pointer;
+   }
+   &__inp{
+      display: none;
    }
    &__items{
       padding: 0 10px;

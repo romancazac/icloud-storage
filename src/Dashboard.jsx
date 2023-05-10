@@ -1,23 +1,31 @@
-import './assets/scss/style.scss'
-import { Aside } from './components/aside/Aside'
-import { Files } from './components/files/Files'
-import { Header } from './components/header/Header'
+import { Outlet } from "react-router-dom"
+import { Aside } from "./components/aside/Aside"
+import { TopActions } from "./components/topActions/TopActions"
 
-function App() {
+
+
+
+
+function Dashboard() {
 
 
   return (
-    <div className="wrapper">
-      <Header />
-      <div className="container">
-        <main className='wrapper__main'>
-          <Aside/>
-          <Files/>
-        </main>
-      </div>
+ 
 
-    </div>
+      <main className='wrapper__main'>
+        <Aside />
+        <div className="wrapper__body">
+          <TopActions />
+          <div className='wrapper__row card'>
+            <Outlet/>
+          </div>
+
+        </div>
+      </main>
+   
+
+
   )
 }
 
-export default App
+export default Dashboard

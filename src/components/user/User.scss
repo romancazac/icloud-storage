@@ -32,7 +32,9 @@
     
    }
    &__btn{
-      
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       background-color: #00549C;
       padding: 0 25px;
       color: #fff;

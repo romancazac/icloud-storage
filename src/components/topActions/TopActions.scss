@@ -1,0 +1,15 @@
+.actions{
+   display: flex;
+   gap: 15px;
+   margin: 0 0 50px 0;
+   &__btn{
+      padding: 0 25px;
+    
+      &:disabled{
+         background-color: $grayColor;
+         border: 1px solid  rgb(220, 220, 220);
+         color: rgb(220, 220, 220);
+      }
+    
+   }
+}

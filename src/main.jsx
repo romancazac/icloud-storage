@@ -1,10 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Dashboard from './Dashboard.jsx'
+import './firebase'
+
+import { RouterProvider } from 'react-router-dom'
+import { router } from './routes'
+
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Dashboard />
+    <RouterProvider router={router}/>
   </React.StrictMode>,
 )
