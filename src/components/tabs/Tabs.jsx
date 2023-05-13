@@ -8,7 +8,11 @@ export const Tabs = ({dataTabs}) => {
       <div className='tab'>
          <nav className="tab__nav">
             {
-               dataTabs.map((i) => <button onClick={() => setOpen(i.id)} key={i.id} className="tab__btn">{i.name}</button>)
+               dataTabs.map((i) => 
+               <button onClick={() => setOpen(i.id)} key={i.id} 
+               className={`tab__btn ${open === i.id ? '_active' : ''}`}
+               
+               >{i.name}</button>)
             }
 
          </nav>
@@ -16,7 +20,7 @@ export const Tabs = ({dataTabs}) => {
          {
             dataTabs.map((i) =>
                open === i.id &&
-               <div className="tab__body">
+               <div className="tab__body" key={i.id}>
                   {i.form}
                </div>
 

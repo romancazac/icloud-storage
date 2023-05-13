@@ -8,6 +8,7 @@ import { Photo } from "./pages/Photo";
 import { Basket } from "./pages/Basket";
 import { Profile } from "./pages/Profile";
 import { Auth } from "./pages/Auth";
+import { PrivateRoute } from "./components/privateRoute/PrivateRoute";
 
 
 
@@ -21,7 +22,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "dashboard",
-        element: <Dashboard />,
+        element: <PrivateRoute><Dashboard /></PrivateRoute>,
         children: [
 
           {
@@ -40,12 +41,12 @@ export const router = createBrowserRouter([
       },
       {
         path: "profile",
-        element: <Profile />
+        element:  <PrivateRoute><Profile /></PrivateRoute>
 
       },
       {
         path: "auth",
-        element: <Auth />
+        element:  <Auth />
       },
     ]
 
