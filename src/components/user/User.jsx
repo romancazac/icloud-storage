@@ -7,7 +7,7 @@ import { signOut } from 'firebase/auth'
 import { auth } from '../../firebase'
 export const User = () => {
    const {user} = useContext(AuthContext);
-   console.log(user)
+
    return (
       <div className="profile__actions">
          <span className='profile__logo'>A</span>
