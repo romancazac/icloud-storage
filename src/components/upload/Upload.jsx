@@ -1,47 +1,31 @@
-import React, { useState } from 'react'
-import { storage } from '../../firebase';
-import { ref, uploadBytes, getDownloadURL} from "firebase/storage";
-import { doc, collection,addDoc,updateDoc} from "firebase/firestore";
-import { getAuth } from "firebase/auth";
-import { db} from '../../firebase';
+import React, { useContext,  useState } from 'react'
 
-
+import {AuthContext} from '../../contexts/AuthContext';
+import { postFile } from '../../services/files';
+import uuid from 'react-uuid';
 export const Upload = () => {
-
+   const { user } = useContext(AuthContext)
    const [file, setFile] = useState();
+   const [progress, setProgress] = useState(0);
+   const uid = uuid()
+   
+   const handleFileUpload = (e) => {
+      
+      setFile(e.target.files[0]);
+      postFile(e.target.files[0], user, setProgress,uid );
 
 
+   }
 
-   const auth = getAuth();
-   const user = auth.currentUser;
 
-   const addImageToUser = async () => {
-      // Creează o referință către subcolecția "images" a utilizatorului curent
-      const imagesRef = collection(db, "users", user.uid, "images");
-
-      // Adaugă un nou document în subcolecția "images" cu informații despre imaginea încărcată
-      const docRef = await addDoc(imagesRef, {
-         filename: file.name,
-         url: "",
-         createdAt: new Date(),
-      });
-
-      // Încarcă fișierul în Firebase Storage
-      const fileRef= ref(storage, `images/${user.uid}/${docRef.id}`);
-      const snapshot = await uploadBytes(fileRef, file);
-
-      // Actualizează URL-ul de descărcare al imaginii în documentul din subcolecția "images"
-      const downloadUrl = await getDownloadURL(fileRef);
-      await updateDoc(doc(db, "users", user.uid, "images", docRef.id), {
-        url: downloadUrl,
-      });
-   };
    return (
       <div>
          <label htmlFor='asideLabel' className='aside__up btn-block'><span className='icon-cloud-upload'></span>Upload File</label>
-         <input onChange={(e) => setFile(e.target.files[0])} type="file" id="asideLabel" className='aside__inp' />
-         {/* {file} */}
-         <button onClick={addImageToUser}>loade</button>
+         <input onChange={handleFileUpload} type="file" id="asideLabel" className='aside__inp' />
+         {file?.name}
+         {progress > 0 && 
+            <progress value={progress} max="100"  className='aside__progress'/>
+         }
       </div>
 
    )

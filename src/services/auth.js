@@ -5,7 +5,7 @@ import { doc, setDoc } from "firebase/firestore";
 
 
 export const regUser = async (data) => {
-    const {email, password} = data
+    const {email, password} = data;
 
 
     try {
@@ -21,7 +21,7 @@ export const regUser = async (data) => {
 
 
 export const logIn = async (data) => {
-  const {username, password} = data
+  const {username, password} = data;
     const auth = getAuth();
     try {
         return  await signInWithEmailAndPassword(auth, username, password)

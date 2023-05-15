@@ -24,4 +24,19 @@
          color: $blueColor;
       }
    }
+   &__progress{
+      width: 100%;
+      height: 12px;
+      border-radius: 10px;
+      margin: 10px 0;
+      &::-webkit-progress-value  {
+         transition : width 10ms ease;
+         background-color: $blueColor;
+         
+      }
+      
+
+      
+   }
 }
+

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { Outlet } from "react-router-dom"
 import { Aside } from "./components/aside/Aside"
 import { TopActions } from "./components/topActions/TopActions"
-import AuthContext from "./contexts/AuthContext"
+import {AuthContext} from "./contexts/AuthContext"
 
 
 

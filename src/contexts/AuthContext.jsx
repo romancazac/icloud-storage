@@ -27,4 +27,3 @@ useEffect(() => {
     );
 }
 
-export default AuthContext;
