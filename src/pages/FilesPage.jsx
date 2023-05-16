@@ -1,18 +1,17 @@
 import { useContext, useState, useEffect } from 'react'
 import Selecto from "react-selecto";
 import { CardFile } from '../components/cardFile/CardFile'
-import {AuthContext} from '../contexts/AuthContext';
-import { getFiles } from '../services/files';
+
 import { Spinner } from '../components/spinner/Spinner';
-import { SelectedFiles } from '../contexts/SelectedFiles';
+import { Files } from '../contexts/Files';
 
-export const Files = () => {
-  const { user } = useContext(AuthContext);
-  const { setSelects} = useContext(SelectedFiles)
+export const FilesPage = () => {
 
-  const [images, setImages] = useState([]);
+  const { setSelects, images, load} = useContext(Files)
+
+
  
-  const [load, setLoad] = useState(true);
+
 
   const onSelectFile = (id, type) => {
     if (type === "select") {
@@ -24,16 +23,6 @@ export const Files = () => {
   }
  
 
-  useEffect(() => {
-
-    getFiles(user.uid).then((images) => {
-
-      setImages(images)
-      setLoad(false)
-    })
-
-  }, []);
-
   return (
     <>
 
@@ -42,8 +31,6 @@ export const Files = () => {
           :
           images.length > 0 ?
             images.map((i) => <>
-
-
               <CardFile {...i} key={i.id} />
             </>)
             :

@@ -2,7 +2,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { MainLayout } from "./layouts/MainLayout";
 
-import { Files } from "./pages/Files";
+import { FilesPage } from "./pages/FilesPage";
 import Dashboard from "./Dashboard";
 import { Photo } from "./pages/Photo";
 import { Basket } from "./pages/Basket";
@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
 
           {
             path: "files",
-            element: <Files />
+            element: <FilesPage />
           },
           {
             path: "photo",

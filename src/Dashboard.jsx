@@ -10,7 +10,6 @@ import {AuthContext} from "./contexts/AuthContext"
 
 function Dashboard() {
   
-const {user} = useContext(AuthContext)
 
 
   return (
