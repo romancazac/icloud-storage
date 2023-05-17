@@ -9,7 +9,7 @@ export const FilesPage = () => {
 
   const { setSelects, images, load} = useContext(Files)
 
-
+  console.log(images)
  
 
 
@@ -21,6 +21,8 @@ export const FilesPage = () => {
     }
 
   }
+
+  console.log(load)
  
 
   return (

@@ -7,7 +7,7 @@ export const Files = createContext();
 
 export const FilesProvider = ({ children }) => {
   const { user } = useContext(AuthContext);
-  
+
   const [images, setImages] = useState([]);
 
   const [load, setLoad] = useState(true);
@@ -17,23 +17,27 @@ export const FilesProvider = ({ children }) => {
 
   const [trashed, setTrashed] = useState([]);
 
-
+ 
 
 
   const onTrash = async () => {
     await setTrash(prev => [...prev, ...selects])
     setSelects([])
   }
-
-
-
-
-  useEffect(() => {
-    getFiles(user.uid).then((images) => {
+  const fetchFiles = () => {
+    setLoad(true)
+    getFiles(user?.uid).then((images) => {
       setImages(images)
       setLoad(false)
     })
 
+  }
+
+
+
+  useEffect(() => {
+    
+    fetchFiles()
 
   }, [user]);
  
@@ -48,7 +52,7 @@ export const FilesProvider = ({ children }) => {
   }, [trash]);
 
   return (
-    <Files.Provider value={{ selects, setSelects, onTrash, trash, images, load, trashed }}>
+    <Files.Provider value={{ selects, setSelects, onTrash, trash, images, load, trashed,fetchFiles,setImages }}>
       {children}
     </Files.Provider>
   )

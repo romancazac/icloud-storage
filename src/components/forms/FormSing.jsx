@@ -2,9 +2,11 @@ import { useState } from 'react'
 import { logIn } from '../../services/auth';
 import Input from '../ui/Input'
 import { useNavigate } from 'react-router-dom';
+import { Spinner } from '../spinner/Spinner';
 
 export const FormSing = () => {
   const navigate = useNavigate()
+  const [load, setLoad] = useState(false)
   const [data, setData] = useState({
     username: '',
     password: '',
@@ -12,8 +14,13 @@ export const FormSing = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await logIn(data);
-    navigate('/dashboard')
+  
+      setLoad(true)
+      await logIn(data);
+      navigate('/dashboard')
+      setLoad(false)
+  
+ 
   }
   return (
     <form action='#' onSubmit={handleSubmit}>
@@ -30,8 +37,8 @@ export const FormSing = () => {
         placeholder='Enter password'
         type='password'
         label='Password' />
-
-      <button type='submit' className="btn-block">Sing In</button>
+     
+      <button type='submit' className="btn-block spinner_btn">Sing In  {load && <Spinner/>}</button>
     </form>
   )
 }

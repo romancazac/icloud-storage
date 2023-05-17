@@ -1,9 +1,9 @@
 
 
-import { collection, getDocs,doc, addDoc,updateDoc } from "firebase/firestore";
-import { db,storage  } from '../firebase';
+import { collection, getDocs, doc, addDoc, updateDoc,where,query,deleteDoc } from "firebase/firestore";
+import { db, storage } from '../firebase';
 
-import { ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL,deleteObject } from "firebase/storage";
 
 
 
@@ -21,7 +21,7 @@ export const getFiles = async (id) => {
 }
 
 
-export const postFile = async (file, user, setProgress,id) => {
+export const postFile = async (file, user, setProgress, id) => {
     try {
         // Creează o referință către subcolecția "images" a utilizatorului curent
         const imagesRef = collection(db, "users", user.uid, "images");
@@ -37,12 +37,12 @@ export const postFile = async (file, user, setProgress,id) => {
         // Încarcă fișierul în Firebase Storage și urmărește progresul încărcării
         const fileRef = ref(storage, `images/${user.uid}/${docRef.id}`);
         const uploadTask = uploadBytesResumable(fileRef, file);
-        uploadTask.on('state_changed', 
+        uploadTask.on('state_changed',
             (snapshot) => {
                 // Actualizează starea de progres
                 const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
                 setProgress(progress);
-            }, 
+            },
             (error) => {
                 console.log(error);
             },
@@ -60,3 +60,27 @@ export const postFile = async (file, user, setProgress,id) => {
         console.log(error);
     }
 };
+
+export const removeFile = async (id,user) => {
+    try {
+    const imagesRef = collection(db, "users", `${user.uid}`, "images");
+
+      const q = query(imagesRef, where('id', '==', id));
+      const querySnapshot = await getDocs(q);
+  
+      const deleteFile = querySnapshot.docs.map(async (doc) => {
+        const fileRef = ref(storage, `images/${user.uid}/${doc.id}`); 
+        
+        await deleteDoc(doc.ref);    
+        await deleteObject(fileRef ) 
+        console.log('File deleted:', doc.id);
+      });
+
+      await Promise.all(deleteFile);
+      
+      console.log('All files deleted successfully');
+      console.log('img delete');
+    } catch (error) {
+      console.log('Error deleting file:', error);
+    }
+  };

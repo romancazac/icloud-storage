@@ -17,11 +17,23 @@
       object-fit: cover;
       border-radius: 10px;
       margin: 0 0 15px 0;
+      background-image: url('../../assets/img/spener.gif');
+      background-position: center;
+      background-size: 20px;
+      background-repeat: no-repeat;
    }
    &__name{
 
       display: block;
 
       // max-width: 150px;
+   }
+   &__btn{
+      display: block;
+      margin: 0 auto 20px auto;
+      text-align: center;
+      &:hover{
+         border-bottom: 1px solid $blueColor ;
+      }
    }
 }

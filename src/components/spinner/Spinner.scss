@@ -1,7 +1,14 @@
 .spinner {
    margin: 0 auto;
    padding: 100px 0;
+  text-align: center;
    &__gif{
       max-width: 80px;
    }
+   &_btn{
+     
+      .spinner__gif{
+         max-width: 20px;
+      }
+   }  
 }
