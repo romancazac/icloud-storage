@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from "react"
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation } from "react-router-dom"
 import { Aside } from "./components/aside/Aside"
 import { TopActions } from "./components/topActions/TopActions"
-import {AuthContext} from "./contexts/AuthContext"
 
 
 
 
 
 function Dashboard() {
-  
+  const navigate = useLocation()
+
 
 
   return (
@@ -18,7 +18,8 @@ function Dashboard() {
       <main className='wrapper__main'>
         <Aside />
         <div className="wrapper__body">
-          <TopActions />
+          { navigate.pathname !== '/dashboard/basket' &&  <TopActions />  }
+      
           <div className='wrapper__row card'>
             <Outlet/>
           </div>

@@ -9,23 +9,26 @@ export const Upload = () => {
    const uid = uuid()
 
    const { user } = useContext(AuthContext)
-   const { fetchFiles} = useContext(Files)
+   const { fetchFiles } = useContext(Files)
 
    const [file, setFile] = useState();
    const [progress, setProgress] = useState(0);
- 
+
 
    const handleFileUpload = async (e) => {
 
       setFile(e.target.files[0]);
       await postFile(e.target.files[0], user, setProgress, uid);
 
-      await  fetchFiles()
+      await fetchFiles()
 
-     setTimeout(() => {
-      setFile('');
-      setProgress(0)
-     },1500)
+      setTimeout(() => {
+         setFile('');
+         setProgress(0);
+
+      }, 1500)
+
+
 
    }
 

@@ -10,15 +10,19 @@ export const Basket = () => {
   const {user} = useContext(AuthContext);
   const CardFileWithRemoveButton = withRemoveButton(CardFile);
 
-  const onRemove = (id) => {
-   removeFile(id, user)
+  const onRemove = async (id) => {
+   await removeFile(id, user)
    window.location.reload();
   }
   return (
     <>
       
       {
+        trashed.length > 0 ?
         trashed?.map((t) => <CardFileWithRemoveButton {...t} onRemove={() => onRemove(t.id)}/>)
+        :
+        "No file "
+    
       }
     </>
   )

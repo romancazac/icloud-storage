@@ -17,13 +17,12 @@ export const FilesProvider = ({ children }) => {
 
   const [trashed, setTrashed] = useState([]);
 
+  const [ urlDownload, setUrlDownload] = useState('')
  
 
 
-  const onTrash = async () => {
-    await setTrash(prev => [...prev, ...selects])
-    setSelects([])
-  }
+
+  // function for get images from db
   const fetchFiles = () => {
     setLoad(true)
     getFiles(user?.uid).then((images) => {
@@ -32,8 +31,12 @@ export const FilesProvider = ({ children }) => {
     })
 
   }
-
-
+// url for view image
+  useEffect(() => {
+    const files =  images.filter((i) => selects.includes(i.id))
+    setUrlDownload(files[0]?.url)
+   
+  },[selects])
 
   useEffect(() => {
     
@@ -41,6 +44,7 @@ export const FilesProvider = ({ children }) => {
 
   }, [user]);
  
+  // to trash
   useEffect(() => {
 
     const trashed = images.filter((obj) => selects.includes(obj.id));
@@ -50,9 +54,13 @@ export const FilesProvider = ({ children }) => {
 
 
   }, [trash]);
+  const onTrash = async () => {
+    await setTrash(prev => [...prev, ...selects])
+    setSelects([])
+  }
 
   return (
-    <Files.Provider value={{ selects, setSelects, onTrash, trash, images, load, trashed,fetchFiles,setImages }}>
+    <Files.Provider value={{urlDownload, selects, setSelects, onTrash, trash, images, load, trashed,fetchFiles,setImages}}>
       {children}
     </Files.Provider>
   )

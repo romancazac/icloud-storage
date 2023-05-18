@@ -1,9 +1,9 @@
 
 
-import { collection, getDocs, doc, addDoc, updateDoc,where,query,deleteDoc } from "firebase/firestore";
+import { collection, getDocs, doc, addDoc, updateDoc, where, query, deleteDoc } from "firebase/firestore";
 import { db, storage } from '../firebase';
 
-import { ref, uploadBytesResumable, getDownloadURL,deleteObject } from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
 
 
 
@@ -61,26 +61,25 @@ export const postFile = async (file, user, setProgress, id) => {
     }
 };
 
-export const removeFile = async (id,user) => {
+export const removeFile = async (id, user) => {
     try {
-    const imagesRef = collection(db, "users", `${user.uid}`, "images");
+        const imagesRef = collection(db, "users", `${user.uid}`, "images");
 
-      const q = query(imagesRef, where('id', '==', id));
-      const querySnapshot = await getDocs(q);
-  
-      const deleteFile = querySnapshot.docs.map(async (doc) => {
-        const fileRef = ref(storage, `images/${user.uid}/${doc.id}`); 
-        
-        await deleteDoc(doc.ref);    
-        await deleteObject(fileRef ) 
-        console.log('File deleted:', doc.id);
-      });
+        const q = query(imagesRef, where('id', '==', id));
+        const querySnapshot = await getDocs(q);
 
-      await Promise.all(deleteFile);
-      
-      console.log('All files deleted successfully');
-      console.log('img delete');
+        const deleteFile = querySnapshot.docs.map(async (doc) => {
+            const fileRef = ref(storage, `images/${user.uid}/${doc.id}`);
+
+            await deleteDoc(doc.ref);
+            await deleteObject(fileRef)
+            console.log('File deleted:', doc.id);
+        });
+
+        await Promise.all(deleteFile);
+
+
     } catch (error) {
-      console.log('Error deleting file:', error);
+        console.log('Error deleting file:', error);
     }
-  };
+};

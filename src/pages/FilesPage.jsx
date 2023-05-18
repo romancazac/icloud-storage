@@ -9,9 +9,6 @@ export const FilesPage = () => {
 
   const { setSelects, images, load} = useContext(Files)
 
-  console.log(images)
- 
-
 
   const onSelectFile = (id, type) => {
     if (type === "select") {
@@ -22,8 +19,6 @@ export const FilesPage = () => {
 
   }
 
-  console.log(load)
- 
 
   return (
     <>

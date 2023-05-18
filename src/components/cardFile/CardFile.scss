@@ -7,6 +7,7 @@
       flex: 0 1 20%;
       text-align: center;
       padding: 10px 0;
+      overflow: hidden;
       &.selected {
          border: 1px solid $blueColor;
       }
@@ -21,6 +22,18 @@
       background-position: center;
       background-size: 20px;
       background-repeat: no-repeat;
+   }
+   &__icon {
+      @extend .card__img;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 15px auto;
+      &::before{
+         font-size: 60px;
+         background-color: #fff;
+      }
+   
    }
    &__name{
 

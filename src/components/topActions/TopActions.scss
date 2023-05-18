@@ -5,7 +5,7 @@
    &__btn{
       padding: 0 25px;
     
-      &:disabled{
+      &:disabled,&.disabled{
          background-color: $grayColor;
          border: 1px solid  rgb(220, 220, 220);
          color: rgb(220, 220, 220);
